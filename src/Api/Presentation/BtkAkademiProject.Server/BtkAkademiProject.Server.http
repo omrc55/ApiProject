@@ -1,0 +1,6 @@
+@BtkAkademiProject.Server_HostAddress = http://localhost:5273
+
+GET {{BtkAkademiProject.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

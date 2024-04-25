@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\BtkApiProject.Infrastructure\BtkApiProject.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\BtkApiProject.Persistence\BtkApiProject.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

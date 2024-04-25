@@ -1,0 +1,87 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BD56AC54-1B16-4AE4-A7AD-278B7F0432BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{F7CA83B5-81AD-4C64-AC8B-81DAA085C3A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B63D5D0F-106F-4B0E-9218-D301394F51FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{E3686E0C-9931-4380-8741-BECBA87F71C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{6F03E03A-CBCB-4995-8C5E-A7DE1E5AAF2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BtkAkademiProject.Server", "src\Api\Presentation\BtkAkademiProject.Server\BtkAkademiProject.Server.csproj", "{EC0E8AFE-4676-47F3-947E-F6B3B2D8053B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BtkApiProject.Domain", "src\Api\Core\BtkApiProject.Domain\BtkApiProject.Domain.csproj", "{A359D5CF-D903-4C7C-AFE1-48423F31CE54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BtkApiProject.Application", "src\Api\Core\BtkApiProject.Application\BtkApiProject.Application.csproj", "{C22EADE7-3AD7-434E-89E8-4670B9470B7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BtkApiProject.Infrastructure", "src\Api\Infrastructure\BtkApiProject.Infrastructure\BtkApiProject.Infrastructure.csproj", "{FFBC1EAA-A606-4F70-864C-84D3E5E50EAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BtkApiProject.Persistence", "src\Api\Infrastructure\BtkApiProject.Persistence\BtkApiProject.Persistence.csproj", "{F4236327-28BF-4E42-AC2A-BF42FE075F05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BtkApiProject.Presentation", "src\Api\Presentation\BtkApiProject.Presentation\BtkApiProject.Presentation.csproj", "{FEA9BD3F-6455-469C-8534-DCB57997144F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{789EEB53-23AB-4AD7-80AA-F74674B1CC15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BtkApiProject.Common", "src\Common\BtkApiProject.Common\BtkApiProject.Common.csproj", "{7E2777E7-CEA4-4662-BEA1-EED7D287D967}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC0E8AFE-4676-47F3-947E-F6B3B2D8053B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC0E8AFE-4676-47F3-947E-F6B3B2D8053B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC0E8AFE-4676-47F3-947E-F6B3B2D8053B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC0E8AFE-4676-47F3-947E-F6B3B2D8053B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A359D5CF-D903-4C7C-AFE1-48423F31CE54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A359D5CF-D903-4C7C-AFE1-48423F31CE54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A359D5CF-D903-4C7C-AFE1-48423F31CE54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A359D5CF-D903-4C7C-AFE1-48423F31CE54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C22EADE7-3AD7-434E-89E8-4670B9470B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C22EADE7-3AD7-434E-89E8-4670B9470B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C22EADE7-3AD7-434E-89E8-4670B9470B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C22EADE7-3AD7-434E-89E8-4670B9470B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFBC1EAA-A606-4F70-864C-84D3E5E50EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFBC1EAA-A606-4F70-864C-84D3E5E50EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFBC1EAA-A606-4F70-864C-84D3E5E50EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFBC1EAA-A606-4F70-864C-84D3E5E50EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4236327-28BF-4E42-AC2A-BF42FE075F05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4236327-28BF-4E42-AC2A-BF42FE075F05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4236327-28BF-4E42-AC2A-BF42FE075F05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4236327-28BF-4E42-AC2A-BF42FE075F05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEA9BD3F-6455-469C-8534-DCB57997144F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEA9BD3F-6455-469C-8534-DCB57997144F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEA9BD3F-6455-469C-8534-DCB57997144F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEA9BD3F-6455-469C-8534-DCB57997144F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E2777E7-CEA4-4662-BEA1-EED7D287D967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E2777E7-CEA4-4662-BEA1-EED7D287D967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E2777E7-CEA4-4662-BEA1-EED7D287D967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E2777E7-CEA4-4662-BEA1-EED7D287D967}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F7CA83B5-81AD-4C64-AC8B-81DAA085C3A5} = {BD56AC54-1B16-4AE4-A7AD-278B7F0432BA}
+		{B63D5D0F-106F-4B0E-9218-D301394F51FF} = {F7CA83B5-81AD-4C64-AC8B-81DAA085C3A5}
+		{E3686E0C-9931-4380-8741-BECBA87F71C0} = {F7CA83B5-81AD-4C64-AC8B-81DAA085C3A5}
+		{6F03E03A-CBCB-4995-8C5E-A7DE1E5AAF2E} = {F7CA83B5-81AD-4C64-AC8B-81DAA085C3A5}
+		{EC0E8AFE-4676-47F3-947E-F6B3B2D8053B} = {6F03E03A-CBCB-4995-8C5E-A7DE1E5AAF2E}
+		{A359D5CF-D903-4C7C-AFE1-48423F31CE54} = {B63D5D0F-106F-4B0E-9218-D301394F51FF}
+		{C22EADE7-3AD7-434E-89E8-4670B9470B7C} = {B63D5D0F-106F-4B0E-9218-D301394F51FF}
+		{FFBC1EAA-A606-4F70-864C-84D3E5E50EAB} = {E3686E0C-9931-4380-8741-BECBA87F71C0}
+		{F4236327-28BF-4E42-AC2A-BF42FE075F05} = {E3686E0C-9931-4380-8741-BECBA87F71C0}
+		{FEA9BD3F-6455-469C-8534-DCB57997144F} = {6F03E03A-CBCB-4995-8C5E-A7DE1E5AAF2E}
+		{789EEB53-23AB-4AD7-80AA-F74674B1CC15} = {BD56AC54-1B16-4AE4-A7AD-278B7F0432BA}
+		{7E2777E7-CEA4-4662-BEA1-EED7D287D967} = {789EEB53-23AB-4AD7-80AA-F74674B1CC15}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7799724A-3F46-4AB5-B7AA-8EDDD43D0AE9}
+	EndGlobalSection
+EndGlobal

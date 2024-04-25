@@ -1,0 +1,60 @@
+﻿namespace BtkApiProject.Common.Tools;
+
+public static class GuidTool
+{
+    public static List<string> Guids()
+    {
+        return [
+            "dd868916-dcde-465f-a89c-313a24d230c6",
+            "8ed24296-d7a3-438b-be89-358a6186a06b",
+            "18130346-e1b7-41d9-ba97-8e414d50457e",
+            "95b499c4-34a7-48a2-ac44-bc096de3fc66",
+            "18e74e76-934f-4c06-b3ce-643c87c6dcfd",
+            "b9066e07-91f7-44bb-a30b-7122aa190ecc",
+            "eba86dbf-a17a-45e5-bcbf-6aa599af3be1",
+            "80c7de02-40f8-4c82-bd90-212560c06949",
+            "c398bbac-0820-4456-8f24-bd5bcaf3771b",
+            "34b395e8-4e60-4e13-9ea9-043c0f10852d",
+            "4804fa42-5494-4cb0-8c17-f23731b0135d",
+            "ef773918-5fff-4c25-84cd-f58b43442e21",
+            "a5d13a52-2dc3-4167-8b8c-4c446844898b",
+            "9072edf5-43e9-45d6-a04e-60e552ac8b57",
+            "09118505-491b-46cd-b154-2f523567c531",
+            "5e5589fe-77d8-49d2-9bbb-d1a42cba0bf1",
+            "fefc43b4-97a8-4713-8071-51930f12cb76",
+            "9a5c8eee-dfa0-4aee-8e39-c7f34bf24367",
+            "61d00226-a54f-43e4-b94f-ebd81c7acfb0",
+            "3e20bea6-3150-4551-8698-c93bcc384a09",
+            "32a39a39-0d03-4569-8908-8f0fbd483c65",
+            "54b58cfa-5b5e-4b2a-88cd-67e340ac758d",
+            "eac29877-cf98-49b2-b092-dabde42b829e",
+            "0d210c85-5f4c-43a6-bcc2-a9546e99601b",
+            "2993cc3b-48d8-4c3a-8662-9ae328688c9c",
+            "8df428ba-1d69-45b8-8d40-40e235c957aa",
+            "3500e840-e254-4823-90fc-7a8789df67f6",
+            "866ea2a9-8721-4251-8022-ad988bd22b8c",
+            "d11c7b91-2e92-4109-9d55-29adc4506f4f",
+            "dfbcdf14-bd61-4f63-847a-969b0c517f12",
+            "1cbbd6f1-b054-44ed-805f-920a998aff90",
+            "065bdc51-a618-45a1-90d7-567ef3843841",
+            "cd2460aa-cf15-4e44-954a-7f7c4c4e5a4e",
+            "57fb9bbb-aa3e-4791-94b7-80ea4883613b",
+            "388e1e08-a7bd-4552-97c8-b7c0f7b80f11",
+            "7cd76b2b-197a-4ba2-98e1-430b8fd23038",
+            "d369c607-b40a-4375-a39b-53287b41aabb",
+            "61f5f234-13df-4b8e-8558-cccd9b84aab0",
+            "96b78027-3570-45bd-8d74-cdaa23c181b8",
+            "f2cd9efc-1bdb-48ad-ad51-13bb4daff119",
+            "c66915b3-d9f8-4bb6-bd46-828e5a946a61",
+            "6d776c03-bd8a-4ed4-965d-92bd5d196380",
+            "99bd8cd0-f4c4-403a-b678-a3c233ed9f7e",
+            "5f6ac016-ec06-4c35-8f74-164c3e0724d3",
+            "cb35d17f-0bdb-4237-9cd9-27e6f436cdc4",
+            "65e02ef9-a536-4c6a-9f18-1c6dd9af4fd6",
+            "35677582-d7f7-4230-ab73-35d5fdc19a1b",
+            "de22d097-5f6c-42bc-947d-5ada70509533",
+            "8c4b66b6-8fea-4330-be08-5e548e473a7b",
+            "7532d41d-4ec0-4c29-9864-25d1e936ccec"
+            ];
+    }
+}
