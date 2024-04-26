@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace BtkApiProject.Persistence.Repositories.Generic;
 
-public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
+public abstract class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
 {
     private readonly CustomDbContext _context;
 
@@ -58,6 +58,6 @@ public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
         if (!tracking)
             query.AsNoTracking();
 
-        return await query.FirstOrDefaultAsync(data => data.ID == Guid.Parse(id));
+        return await query.FirstOrDefaultAsync(data => data.ID.Equals(Guid.Parse(id)));
     }
 }

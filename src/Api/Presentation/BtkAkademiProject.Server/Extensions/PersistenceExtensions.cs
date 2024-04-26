@@ -9,13 +9,7 @@ namespace BtkAkademiProject.Server.Extensions;
 
 public static class PersistenceExtensions
 {
-    public static void CustomDbContextConfiguration(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddDbContext<CustomDbContext>(option =>
-        {
-            option.UseSqlServer(configuration.GetConnectionString("mssqlconnection"));
-        });
-    }
+    public static void CustomDbContextConfiguration(this IServiceCollection services, IConfiguration configuration) => services.AddDbContext<CustomDbContext>(option => option.UseSqlServer(configuration.GetConnectionString("mssqlconnection")));
 
     public static void AddRepositories(this IServiceCollection services)
     {

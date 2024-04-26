@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\BtkApiProject.Infrastructure\BtkApiProject.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\BtkApiProject.Persistence\BtkApiProject.Persistence.csproj" />
   </ItemGroup>

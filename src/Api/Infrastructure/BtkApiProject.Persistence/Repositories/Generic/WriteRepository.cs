@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BtkApiProject.Persistence.Repositories.Generic;
 
-public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
+public abstract class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
 {
     private readonly CustomDbContext _context;
 
