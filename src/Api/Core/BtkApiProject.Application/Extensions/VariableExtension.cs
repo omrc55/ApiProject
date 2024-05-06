@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using BtkApiProject.Common.Tools;
+using System.Text;
 
 namespace BtkApiProject.Application.Extensions;
 
@@ -14,7 +15,7 @@ public static class VariableExtension
     public static string? Cryption(this string value, int mixer = 2, int section = 2)
     {
         if (value.Length < 3)
-            throw new ArgumentException("The expression to be converted must be at least 3 characters.");
+            throw new ArgumentException(ErrorMessages.CryptionValueError);
 
         if (section < 2)
             section = 2;
@@ -47,7 +48,7 @@ public static class VariableExtension
     public static string? DeCryption(this string value, int mixer = 2, int section = 2)
     {
         if (value.Length < 3)
-            throw new ArgumentException("The expression to be converted must be at least 3 characters.");
+            throw new ArgumentException(ErrorMessages.CryptionValueError);
 
         if (section < 2)
             section = 2;

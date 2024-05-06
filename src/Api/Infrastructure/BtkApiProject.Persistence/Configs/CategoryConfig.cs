@@ -25,22 +25,25 @@ public class CategoryConfig : IEntityTypeConfiguration<Category>
             .HasMaxLength((int)DataLengthEnum.DescriptionMax);
 
         builder
-            .HasData(FakeCategories());
+            .HasData(FakeCategories);
     }
 
-    private IEnumerable<Category> FakeCategories()
+    private static IEnumerable<Category> FakeCategories
     {
-        int count = 0;
+        get
+        {
+            int count = 0;
 
-        string[] categories = ["Kitap", "Elektronik", "Film", "Spor", "Giyim", "Aksesuar", "Mobilya", "Oyun", "Sanat", "Müzik"];
+            string[] categories = ["Book", "Electronics", "Movie", "Sport", "Clothing", "Accessory", "Furniture", "Game", "Art", "Music"];
 
-        var result = new Faker<Category>("tr")
-            .RuleFor(i => i.ID, i => Guid.Parse(GuidTool.Guids()[count]))
-            .RuleFor(i => i.Name, i => categories[count++])
-            .RuleFor(i => i.Description, i => i.Lorem.Lines(1))
-            .RuleFor(i => i.CreatedDate, i => i.Date.Between(DateTime.Now.AddMonths(-12), DateTime.Now))
-            .Generate(10);
+            var result = new Faker<Category>("en")
+                .RuleFor(i => i.ID, i => Guid.Parse(GuidTool.Guids()[count]))
+                .RuleFor(i => i.Name, i => categories[count++])
+                .RuleFor(i => i.Description, i => i.Lorem.Lines(1))
+                .RuleFor(i => i.CreatedDate, i => i.Date.Between(DateTime.Now.AddMonths(-12), DateTime.Now))
+                .Generate(10);
 
-        return result;
+            return result;
+        }
     }
 }

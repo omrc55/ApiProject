@@ -11,20 +11,23 @@ public class ProductDetailConfig : IEntityTypeConfiguration<ProductDetail>
     public void Configure(EntityTypeBuilder<ProductDetail> builder)
     {
         builder
-            .HasData(FakeProductDetails());
+            .HasData(FakeProductDetails);
     }
 
-    private IEnumerable<ProductDetail> FakeProductDetails()
+    private static IEnumerable<ProductDetail> FakeProductDetails
     {
-        int count = 0;
+        get
+        {
+            int count = 0;
 
-        var result = new Faker<ProductDetail>("tr")
-            .RuleFor(i => i.ID, i => Guid.Parse(GuidTool.Guids()[count]))
-            .RuleFor(i => i.Quantity, i => i.Random.Number(50))
-            .RuleFor(i => i.ProductID, i => Guid.Parse(GuidTool.Guids()[count++]))
-            .RuleFor(i => i.CreatedDate, i => i.Date.Between(DateTime.Now.AddMonths(-12), DateTime.Now))
-            .Generate(50);
+            var result = new Faker<ProductDetail>("en")
+                .RuleFor(i => i.ID, i => Guid.Parse(GuidTool.Guids()[count]))
+                .RuleFor(i => i.Quantity, i => i.Random.Number(50))
+                .RuleFor(i => i.ProductID, i => Guid.Parse(GuidTool.Guids()[count++]))
+                .RuleFor(i => i.CreatedDate, i => i.Date.Between(DateTime.Now.AddMonths(-12), DateTime.Now))
+                .Generate(50);
 
-        return result;
+            return result;
+        }
     }
 }

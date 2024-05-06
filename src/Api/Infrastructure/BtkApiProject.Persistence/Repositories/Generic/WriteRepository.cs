@@ -46,9 +46,7 @@ public abstract class WriteRepository<T> : IWriteRepository<T> where T : BaseEnt
             return true;
         }
         else
-        {
             return false;
-        }
     }
 
     public Task<bool> ApproveAsync(T model)
@@ -67,9 +65,7 @@ public abstract class WriteRepository<T> : IWriteRepository<T> where T : BaseEnt
                 T? model = await Table.FirstOrDefaultAsync(d => d.ID == Guid.Parse(id));
 
                 if (model is not null)
-                {
                     model.IsApproved = true;
-                }
             }
 
             return true;
@@ -83,9 +79,7 @@ public abstract class WriteRepository<T> : IWriteRepository<T> where T : BaseEnt
     public Task<bool> ApproveAsync(List<T> datas)
     {
         foreach (T data in datas)
-        {
             data.IsApproved = true;
-        }
 
         try
         {
@@ -108,9 +102,7 @@ public abstract class WriteRepository<T> : IWriteRepository<T> where T : BaseEnt
             return true;
         }
         else
-        {
             return false;
-        }
     }
 
     public Task<bool> DeleteAsync(T model)
@@ -129,9 +121,7 @@ public abstract class WriteRepository<T> : IWriteRepository<T> where T : BaseEnt
                 T? model = await Table.FirstOrDefaultAsync(d => d.ID == Guid.Parse(id));
 
                 if (model is not null)
-                {
                     model.IsDeleted = true;
-                }
             }
 
             return true;
@@ -145,9 +135,7 @@ public abstract class WriteRepository<T> : IWriteRepository<T> where T : BaseEnt
     public Task<bool> DeleteAsync(List<T> datas)
     {
         foreach (T data in datas)
-        {
             data.IsDeleted = true;
-        }
 
         try
         {

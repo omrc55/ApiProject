@@ -26,19 +26,22 @@ public class OrderProductConfig : IEntityTypeConfiguration<OrderProduct>
             .OnDelete(DeleteBehavior.NoAction);
 
         builder
-            .HasData(FakeOrderProducts());
+            .HasData(FakeOrderProducts);
     }
 
-    private IEnumerable<OrderProduct> FakeOrderProducts()
+    private static IEnumerable<OrderProduct> FakeOrderProducts
     {
-        int orderInt = 0;
-        int productInt = 0;
+        get
+        {
+            int orderInt = 0;
+            int productInt = 0;
 
-        var result = new Faker<OrderProduct>()
-            .RuleFor(i => i.OrderID, i => Guid.Parse(GuidTool.Guids()[(productInt + 1) < (orderInt + 1) * 2 ? orderInt : orderInt++]))
-            .RuleFor(i => i.ProductID, i => Guid.Parse(GuidTool.Guids()[productInt++]))
-            .Generate(30);
+            var result = new Faker<OrderProduct>()
+                .RuleFor(i => i.OrderID, i => Guid.Parse(GuidTool.Guids()[(productInt + 1) < (orderInt + 1) * 2 ? orderInt : orderInt++]))
+                .RuleFor(i => i.ProductID, i => Guid.Parse(GuidTool.Guids()[productInt++]))
+                .Generate(30);
 
-        return result;
+            return result;
+        }
     }
 }

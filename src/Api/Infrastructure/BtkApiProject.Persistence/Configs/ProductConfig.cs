@@ -33,23 +33,26 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
             .HasMaxLength((int)DataLengthEnum.DescriptionMax);
 
         builder
-            .HasData(FakeProducts());
+            .HasData(FakeProducts);
     }
 
-    private IEnumerable<Product> FakeProducts()
+    private static IEnumerable<Product> FakeProducts
     {
-        Random random = new();
-        int count = 0;
+        get
+        {
+            Random random = new();
+            int count = 0;
 
-        var result = new Faker<Product>("tr")
-            .RuleFor(i => i.ID, i => Guid.Parse(GuidTool.Guids()[count++]))
-            .RuleFor(i => i.Name, i => i.Commerce.ProductName())
-            .RuleFor(i => i.Description, i => i.Lorem.Lines(1))
-            .RuleFor(i => i.Price, i => i.Random.Number(1, 500))
-            .RuleFor(i => i.CategoryID, Guid.Parse(GuidTool.Guids()[random.Next(0, 9)]))
-            .RuleFor(i => i.CreatedDate, i => i.Date.Between(DateTime.Now.AddMonths(-12), DateTime.Now))
-            .Generate(50);
+            var result = new Faker<Product>("en")
+                .RuleFor(i => i.ID, i => Guid.Parse(GuidTool.Guids()[count++]))
+                .RuleFor(i => i.Name, i => i.Commerce.ProductName())
+                .RuleFor(i => i.Description, i => i.Lorem.Lines(1))
+                .RuleFor(i => i.Price, i => i.Random.Number(1, 500))
+                .RuleFor(i => i.CategoryID, Guid.Parse(GuidTool.Guids()[random.Next(0, 9)]))
+                .RuleFor(i => i.CreatedDate, i => i.Date.Between(DateTime.Now.AddMonths(-12), DateTime.Now))
+                .Generate(50);
 
-        return result;
+            return result;
+        }
     }
 }

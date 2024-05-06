@@ -19,7 +19,7 @@ public abstract class ReadRepository<T> : IReadRepository<T> where T : BaseEntit
 
     public IQueryable<T> GetAllItems(bool tracking = false)
     {
-        IQueryable<T> query = Table.AsQueryable();
+        IQueryable<T> query = Table.AsQueryable().OrderBy(o => o.CreatedDate);
 
         if (!tracking)
             query.AsNoTracking();
@@ -29,7 +29,7 @@ public abstract class ReadRepository<T> : IReadRepository<T> where T : BaseEntit
 
     public IQueryable<T> GetAllItems(Expression<Func<T, bool>> filter, bool tracking = false)
     {
-        IQueryable<T> query = Table.Where(filter);
+        IQueryable<T> query = Table.Where(filter).OrderBy(o => o.CreatedDate);
 
         if (!tracking)
             query.AsNoTracking();
@@ -37,9 +37,9 @@ public abstract class ReadRepository<T> : IReadRepository<T> where T : BaseEntit
         return query;
     }
 
-    public async Task<int> GetCountAsync() => await Table.CountAsync();
+    public async Task<int> GetCountAsync() => await Table.AsNoTracking().CountAsync();
 
-    public async Task<int> GetCountAsync(Expression<Func<T, bool>> filter) => await Table.CountAsync(filter);
+    public async Task<int> GetCountAsync(Expression<Func<T, bool>> filter) => await Table.AsNoTracking().CountAsync(filter);
 
     public async Task<T?> GetSingleAsync(Expression<Func<T, bool>> filter, bool tracking = false)
     {
@@ -49,15 +49,5 @@ public abstract class ReadRepository<T> : IReadRepository<T> where T : BaseEntit
             query.AsNoTracking();
 
         return await query.FirstOrDefaultAsync(filter);
-    }
-
-    public async Task<T?> GetSingleAsync(string id, bool tracking = false)
-    {
-        IQueryable<T> query = Table.AsQueryable();
-
-        if (!tracking)
-            query.AsNoTracking();
-
-        return await query.FirstOrDefaultAsync(data => data.ID.Equals(Guid.Parse(id)));
     }
 }

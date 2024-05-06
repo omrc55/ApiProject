@@ -11,18 +11,21 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
     public void Configure(EntityTypeBuilder<Order> builder)
     {
         builder
-            .HasData(FakeOrders());
+            .HasData(FakeOrders);
     }
 
-    private IEnumerable<Order> FakeOrders()
+    private static IEnumerable<Order> FakeOrders
     {
-        int count = 0;
+        get
+        {
+            int count = 0;
 
-        var result = new Faker<Order>("tr")
-            .RuleFor(i => i.ID, i => Guid.Parse(GuidTool.Guids()[count++]))
-            .RuleFor(i => i.CreatedDate, i => i.Date.Between(DateTime.Now.AddMonths(-12), DateTime.Now))
-            .Generate(15);
+            var result = new Faker<Order>("en")
+                .RuleFor(i => i.ID, i => Guid.Parse(GuidTool.Guids()[count++]))
+                .RuleFor(i => i.CreatedDate, i => i.Date.Between(DateTime.Now.AddMonths(-12), DateTime.Now))
+                .Generate(15);
 
-        return result;
+            return result;
+        }
     }
 }
