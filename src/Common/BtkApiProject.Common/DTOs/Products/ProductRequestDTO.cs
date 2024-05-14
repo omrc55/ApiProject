@@ -11,8 +11,7 @@ public record ProductRequestDTO : BaseRequestDTO
     [StringLength((int)DataLengthEnum.NameMax, ErrorMessage = DataMessages.NameLength, MinimumLength = (int)DataLengthEnum.NameMin)]
     public string? Name { get; init; }
 
-    [Required(ErrorMessage = DataMessages.FieldRequired)]
-    [StringLength((int)DataLengthEnum.DescriptionMax, ErrorMessage = DataMessages.DescriptionLength, MinimumLength = (int)DataLengthEnum.DescriptionMin)]
+    [StringLength((int)DataLengthEnum.DescriptionMax, ErrorMessage = DataMessages.DescriptionLength)]
     public string? Description { get; init; }
     public double? Price { get; init; }
 

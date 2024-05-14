@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
+using BtkApiProject.Application.Exceptions.Products;
 using BtkApiProject.Application.Interfaces.Repositories.Write;
+using BtkApiProject.Application.Interfaces.Services;
 using BtkApiProject.Common.Tools;
 using BtkApiProject.Domain.Entities;
 using MediatR;
-using Microsoft.Extensions.Logging;
 
 namespace BtkApiProject.Application.Features.Commands.Products.AddProduct;
 
@@ -11,9 +12,9 @@ public class AddProductCommandHandler : IRequestHandler<AddProductCommandRequest
 {
     private readonly IProductWriteRepository _productWriteRepository;
     private readonly IMapper _mapper;
-    private readonly ILogger<AddProductCommandHandler> _logger;
+    private readonly ILoggerService _logger;
 
-    public AddProductCommandHandler(IProductWriteRepository productWriteRepository, IMapper mapper, ILogger<AddProductCommandHandler> logger)
+    public AddProductCommandHandler(IProductWriteRepository productWriteRepository, IMapper mapper, ILoggerService logger)
     {
         _productWriteRepository = productWriteRepository;
         _mapper = mapper;
@@ -36,9 +37,9 @@ public class AddProductCommandHandler : IRequestHandler<AddProductCommandRequest
         if (response)
             await _productWriteRepository.SaveAsync();
         else
-            throw new Exception($"{ErrorMessages.ProductNotApproved}");
+            throw new ProductNotAddedException(productID.ToString());
 
-        _logger.LogInformation($"{LogMessages.ProductAdded} {request.Product?.Name}({productID})");
+        _logger.LogInfo($"{LogMessages.ProductAdded} {request.Product?.Name}({productID})");
         return new() { Product = request.Product };
     }
 }

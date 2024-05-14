@@ -1,21 +1,11 @@
-﻿using BtkApiProject.Persistence.Contexts;
-using Microsoft.AspNetCore.HttpLogging;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
 using Serilog.Core;
 
-namespace BtkAkademiProject.Server.Extensions;
+namespace BtkAkademiProject.Server.Extensions.Server;
 
-public static class ServerExtensions
+public static class LoggingExtensions
 {
-    public static void ConfigureMigrations(this IApplicationBuilder app)
-    {
-        CustomDbContext context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<CustomDbContext>();
-
-        if (context.Database.GetPendingMigrations().Any())
-            context.Database.Migrate();
-    }
-
     public static void ConfigureHttpLogging(this IServiceCollection services)
     {
         services.AddHttpLogging(logging =>
