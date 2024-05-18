@@ -2,6 +2,7 @@
 using BtkApiProject.Application.Interfaces.Services;
 using BtkApiProject.Common.Models;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 
 namespace BtkAkademiProject.Server.Extensions.Server;
@@ -34,6 +35,14 @@ public static class ExceptionExtensions
                     }.ToString());
                 }
             });
+        });
+    }
+
+    public static void ConfigureApiBehavior(this IServiceCollection services)
+    {
+        services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.SuppressModelStateInvalidFilter = true;
         });
     }
 }

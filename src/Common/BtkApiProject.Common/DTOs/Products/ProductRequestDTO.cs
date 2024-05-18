@@ -18,5 +18,5 @@ public record ProductRequestDTO : BaseRequestDTO
     [Required(ErrorMessage = DataMessages.FieldRequired)]
     public Guid? CategoryID { get; init; }
 
-    public virtual ProductDetailRequestDTO? ProductDetail { get; init; }
+    public virtual required ProductDetailRequestDTO ProductDetail { get; init; }
 }

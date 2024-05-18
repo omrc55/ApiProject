@@ -3,6 +3,4 @@ using BtkApiProject.Domain.Entities;
 
 namespace BtkApiProject.Application.Interfaces.Repositories.Read;
 
-public interface IProductReadRepository : IReadRepository<Product>
-{
-}
+public interface IProductReadRepository : IReadRepository<Product> { }

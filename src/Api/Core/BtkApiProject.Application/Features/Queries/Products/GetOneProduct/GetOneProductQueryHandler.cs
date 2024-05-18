@@ -10,35 +10,36 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BtkApiProject.Application.Features.Queries.Products.GetOneProduct;
 
-public class GetOneProductQueryHandler : IRequestHandler<GetOneProductQueryRequest, GetOneProductQueryResponse>
+public class GetOneProductQueryHandler(IProductReadRepository productReadRepository, IMapper mapper, ILoggerService logger) : IRequestHandler<GetOneProductQueryRequest, GetOneProductQueryResponse>
 {
-    private readonly IProductReadRepository _productReadRepository;
-    private readonly ILoggerService _logger;
-    private readonly IMapper _mapper;
-
-    public GetOneProductQueryHandler(IProductReadRepository productReadRepository, IMapper mapper, ILoggerService logger)
-    {
-        _productReadRepository = productReadRepository;
-        _mapper = mapper;
-        _logger = logger;
-    }
+    private readonly IProductReadRepository _productReadRepository = productReadRepository;
+    private readonly ILoggerService _logger = logger;
+    private readonly IMapper _mapper = mapper;
 
     public async Task<GetOneProductQueryResponse> Handle(GetOneProductQueryRequest request, CancellationToken cancellationToken)
     {
-        ProductResponseDTO productDTO;
-        IQueryable<Product> products = _productReadRepository.GetAllItems().Where(p => p.ID == Guid.Parse(request.ID));
+        IQueryable<Product> products = _productReadRepository.GetAllItems();
+        products = products.Where(p => p.ID == Guid.Parse(request.ID));
 
         if (products.Any())
         {
-            IQueryable<Product>? andProductDetail = request.AddProductDetail ? products.Include(p => p.ProductDetail) : products;
-            IQueryable<Product>? andCategory = request.AddCategory ? andProductDetail.Include(i => i.Category) : andProductDetail;
-            Product? andOrder = request.AddOrders ? await andCategory.Include(i => i.OrderProducts).ThenInclude(o => o.Order).FirstOrDefaultAsync(cancellationToken) : await andCategory.FirstOrDefaultAsync(cancellationToken);
-            productDTO = _mapper.Map<ProductResponseDTO>(andOrder);
+            if (request.AddProductDetail)
+                products = products.Include(i => i.ProductDetail);
+
+            if (request.AddCategory)
+                products = products.Include(i => i.Category);
+
+            if (request.AddOrders)
+                products = products.Include(i => i.OrderProducts).ThenInclude(o => o.Order);
+
+            Product? product = await products.FirstOrDefaultAsync(cancellationToken);
+            ProductResponseDTO productDTO = _mapper.Map<ProductResponseDTO>(product);
+
+            _logger.LogInfo($"{LogMessages.ProductListed} {productDTO.Name}({productDTO.ID})");
+            return new() { Product = productDTO };
         }
         else
             throw new ProductNotFoundException(request.ID);
 
-        _logger.LogInfo($"{LogMessages.ProductListed} {productDTO.Name}({productDTO.ID})");
-        return new() { Product = productDTO };
     }
 }

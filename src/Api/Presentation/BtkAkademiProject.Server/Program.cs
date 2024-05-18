@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Extensions
 builder.Services.ConfigureController();
+builder.Services.ConfigureApiBehavior();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -17,6 +18,7 @@ builder.Services.CustomDbContextConfiguration(builder.Configuration);
 builder.Services.ApplicationServiceRegistrations();
 builder.Services.PersistenceServiceRegistrations();
 builder.Services.InfrastructureServiceRegistrations();
+builder.Services.ServerServiceRegistrations();
 builder.Services.ConfigureHttpLogging();
 
 builder.Host.ConfigureSerilog(builder.Configuration);

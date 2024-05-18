@@ -2,13 +2,10 @@
 
 namespace BtkApiProject.Common.Models;
 
-public class ErrorDetailModel
+public sealed record ErrorDetailModel
 {
-    public int StatusCode { get; set; }
-    public string? Message { get; set; }
+    public int StatusCode { get; init; }
+    public string? Message { get; init; }
 
-    public override string ToString()
-    {
-        return JsonSerializer.Serialize(this);
-    }
+    public override string ToString() => JsonSerializer.Serialize(this);
 }
