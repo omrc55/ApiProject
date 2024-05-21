@@ -7,6 +7,7 @@ using BtkApiProject.Application.Features.Queries.Products.GetOneProduct;
 using BtkApiProject.Presentation.ActionFilters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace BtkApiProject.Presentation.Controllers;
 
@@ -21,6 +22,8 @@ public class ProductsController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> GetAllProducts([FromQuery] GetAllProductsQueryRequest request)
     {
         var response = await _mediator.Send(request);
+        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(response.MetaData));
+
         return Ok(response);
     }
 

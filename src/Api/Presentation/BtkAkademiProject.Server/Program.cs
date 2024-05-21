@@ -20,6 +20,7 @@ builder.Services.PersistenceServiceRegistrations();
 builder.Services.InfrastructureServiceRegistrations();
 builder.Services.ServerServiceRegistrations();
 builder.Services.ConfigureHttpLogging();
+builder.Services.ConfigureCors();
 
 builder.Host.ConfigureSerilog(builder.Configuration);
 
@@ -38,6 +39,7 @@ if (app.Environment.IsDevelopment())
 app.UseHsts();
 app.UseHttpLogging();
 app.UseHttpsRedirection();
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 // Extensions

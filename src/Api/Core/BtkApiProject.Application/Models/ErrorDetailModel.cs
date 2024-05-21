@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace BtkApiProject.Common.Models;
+namespace BtkApiProject.Application.Models;
 
 public sealed record ErrorDetailModel
 {

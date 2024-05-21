@@ -1,4 +1,4 @@
-﻿using BtkAkademiProject.Server.Formatters;
+﻿using BtkAkademiProject.Server.Formatters.CSVFormatter;
 using BtkApiProject.Presentation;
 
 namespace BtkAkademiProject.Server.Extensions.Server;

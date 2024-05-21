@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using BtkApiProject.Application.Features.Queries.Products.GetAllProducts;
+using BtkApiProject.Application.Features.Queries.Products.GetOneProduct;
+using BtkApiProject.Application.Parameters;
 using BtkApiProject.Common.DTOs.Categories;
+using BtkApiProject.Common.DTOs.Joins;
 using BtkApiProject.Common.DTOs.Orders;
 using BtkApiProject.Common.DTOs.Products;
-using BtkApiProject.Common.DTOs.Joins;
 using BtkApiProject.Domain.Entities;
 using BtkApiProject.Domain.Entities.Joins;
 
@@ -19,5 +22,10 @@ public class MapperProfile : Profile
         CreateMap<OrderProduct, OrdersForProductDTO>().ReverseMap();
         CreateMap<Category, CategoryResponseForProductDTO>().ReverseMap();
         CreateMap<Order, OrderResponseForProductDTO>().ReverseMap();
+        CreateMap<ProductParameters, GetOneProductQueryRequest>().ReverseMap();
+        CreateMap<ProductParameters, GetAllProductsQueryRequest>()
+            .ForMember(p => p.PageNumber, o => o.MapFrom(g => g.Pagination.PageNumber))
+            .ForMember(p => p.PageSize, o => o.MapFrom(g => g.Pagination.PageSize))
+            .ReverseMap();
     }
 }

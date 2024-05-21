@@ -1,6 +1,6 @@
 ﻿using BtkApiProject.Application.Exceptions.Common;
 using BtkApiProject.Application.Interfaces.Services;
-using BtkApiProject.Common.Models;
+using BtkApiProject.Application.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;

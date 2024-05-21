@@ -1,5 +1,5 @@
 ﻿using BtkApiProject.Application.Interfaces.Services;
-using BtkApiProject.Common.Models;
+using BtkApiProject.Application.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
 

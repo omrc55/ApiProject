@@ -9,4 +9,6 @@ public sealed record GetAllProductsQueryRequest : IRequest<GetAllProductsQueryRe
     public bool AddProductDetail { get; init; } = false;
     public bool AddCategory { get; init; } = false;
     public bool AddOrders { get; init; } = false;
+    public int PageNumber { get; init; }
+    public int PageSize { get; init; }
 }

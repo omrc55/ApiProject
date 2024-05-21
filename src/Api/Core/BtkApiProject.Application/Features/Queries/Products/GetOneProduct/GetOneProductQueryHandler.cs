@@ -2,11 +2,12 @@
 using BtkApiProject.Application.Exceptions.Products;
 using BtkApiProject.Application.Interfaces.Repositories.Read;
 using BtkApiProject.Application.Interfaces.Services;
+using BtkApiProject.Application.Parameters;
 using BtkApiProject.Common.DTOs.Products;
 using BtkApiProject.Common.Tools;
 using BtkApiProject.Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace BtkApiProject.Application.Features.Queries.Products.GetOneProduct;
 
@@ -18,21 +19,13 @@ public class GetOneProductQueryHandler(IProductReadRepository productReadReposit
 
     public async Task<GetOneProductQueryResponse> Handle(GetOneProductQueryRequest request, CancellationToken cancellationToken)
     {
-        IQueryable<Product> products = _productReadRepository.GetAllItems();
-        products = products.Where(p => p.ID == Guid.Parse(request.ID));
+        var parameters = _mapper.Map<ProductParameters>(request);
+        Expression<Func<Product, bool>> filter = p => p.ID == Guid.Parse(request.ID);
 
-        if (products.Any())
+        var product = await _productReadRepository.GetProductAsync(parameters, filter);
+
+        if (product is not null)
         {
-            if (request.AddProductDetail)
-                products = products.Include(i => i.ProductDetail);
-
-            if (request.AddCategory)
-                products = products.Include(i => i.Category);
-
-            if (request.AddOrders)
-                products = products.Include(i => i.OrderProducts).ThenInclude(o => o.Order);
-
-            Product? product = await products.FirstOrDefaultAsync(cancellationToken);
             ProductResponseDTO productDTO = _mapper.Map<ProductResponseDTO>(product);
 
             _logger.LogInfo($"{LogMessages.ProductListed} {productDTO.Name}({productDTO.ID})");
@@ -40,6 +33,5 @@ public class GetOneProductQueryHandler(IProductReadRepository productReadReposit
         }
         else
             throw new ProductNotFoundException(request.ID);
-
     }
 }

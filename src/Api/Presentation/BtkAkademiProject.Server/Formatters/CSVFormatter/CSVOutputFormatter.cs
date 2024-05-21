@@ -1,10 +1,12 @@
-﻿using BtkApiProject.Application.Features.Queries.Products.GetAllProducts;
+﻿using BtkAkademiProject.Server.Formatters.CSVFormatter.Products;
+using BtkApiProject.Application.Features.Queries.Products.GetAllProducts;
+using BtkApiProject.Application.Features.Queries.Products.GetOneProduct;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using System.Net.Mime;
 using System.Text;
 
-namespace BtkAkademiProject.Server.Formatters;
+namespace BtkAkademiProject.Server.Formatters.CSVFormatter;
 
 public class CSVOutputFormatter : TextOutputFormatter
 {
@@ -17,16 +19,11 @@ public class CSVOutputFormatter : TextOutputFormatter
 
     protected override bool CanWriteType(Type? type)
     {
-        if (typeof(GetAllProductsQueryResponse).IsAssignableFrom(type) || typeof(IEnumerable<GetAllProductsQueryResponse>).IsAssignableFrom(type))
+        if (typeof(GetAllProductsQueryResponse).IsAssignableFrom(type) || typeof(GetOneProductQueryResponse).IsAssignableFrom(type))
         {
             return base.CanWriteType(type);
         }
         return false;
-    }
-
-    private static void FormatCSV(StringBuilder buffer, GetAllProductsQueryResponse product)
-    {
-        buffer.AppendLine($"{product.QueryProductsCount}, {product.TotalProductsCount}");
     }
 
     public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
@@ -35,17 +32,14 @@ public class CSVOutputFormatter : TextOutputFormatter
         var buffer = new StringBuilder();
         var obj = context.Object;
 
-        if (obj is IEnumerable<GetAllProductsQueryResponse> products)
+        if (obj is GetAllProductsQueryResponse products)
         {
-            foreach (var product in products)
-            {
-                FormatCSV(buffer, product);
-            }
+            GetAllProductsCSVOutputFormatter.Formatter(buffer, products);
         }
-        else
+
+        if (obj is GetOneProductQueryResponse product)
         {
-            if (obj is not null)
-                FormatCSV(buffer, (GetAllProductsQueryResponse)obj);
+            GetOneProductCSVOutputFormatter.Formatter(buffer, product);
         }
 
         await response.WriteAsync(buffer.ToString());
