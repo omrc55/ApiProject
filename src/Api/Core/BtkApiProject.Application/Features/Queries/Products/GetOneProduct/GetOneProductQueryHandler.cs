@@ -19,6 +19,9 @@ public class GetOneProductQueryHandler(IProductReadRepository productReadReposit
 
     public async Task<GetOneProductQueryResponse> Handle(GetOneProductQueryRequest request, CancellationToken cancellationToken)
     {
+        if (!request.ValidID)
+            throw new IDsNotGuidBadRequestException(false);
+
         var parameters = _mapper.Map<ProductParameters>(request);
         Expression<Func<Product, bool>> filter = p => p.ID == Guid.Parse(request.ID);
 

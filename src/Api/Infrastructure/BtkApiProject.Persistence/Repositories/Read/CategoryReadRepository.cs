@@ -5,9 +5,4 @@ using BtkApiProject.Persistence.Repositories.Generic;
 
 namespace BtkApiProject.Persistence.Repositories.Read;
 
-public class CategoryReadRepository : ReadRepository<Category>, ICategoryReadRepository
-{
-    public CategoryReadRepository(CustomDbContext context) : base(context)
-    {
-    }
-}
+public class CategoryReadRepository(CustomDbContext context) : ReadRepository<Category>(context), ICategoryReadRepository { }

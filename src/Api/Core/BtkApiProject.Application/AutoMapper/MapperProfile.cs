@@ -22,6 +22,7 @@ public class MapperProfile : Profile
         CreateMap<OrderProduct, OrdersForProductDTO>().ReverseMap();
         CreateMap<Category, CategoryResponseForProductDTO>().ReverseMap();
         CreateMap<Order, OrderResponseForProductDTO>().ReverseMap();
+        CreateMap<RequestParameters, ProductParameters>().ReverseMap();
         CreateMap<ProductParameters, GetOneProductQueryRequest>().ReverseMap();
         CreateMap<ProductParameters, GetAllProductsQueryRequest>()
             .ForMember(p => p.PageNumber, o => o.MapFrom(g => g.Pagination.PageNumber))

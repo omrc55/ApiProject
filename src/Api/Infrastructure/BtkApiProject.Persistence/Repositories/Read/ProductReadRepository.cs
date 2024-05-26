@@ -1,78 +1,54 @@
-﻿using BtkApiProject.Application.Helpers;
+﻿using AutoMapper;
+using BtkApiProject.Application.Helpers;
 using BtkApiProject.Application.Interfaces.Repositories.Read;
 using BtkApiProject.Application.Parameters;
 using BtkApiProject.Domain.Entities;
 using BtkApiProject.Persistence.Contexts;
 using BtkApiProject.Persistence.Repositories.Generic;
+using BtkApiProject.Persistence.Repositories.Read.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace BtkApiProject.Persistence.Repositories.Read;
 
-public class ProductReadRepository(CustomDbContext context) : ReadRepository<Product>(context), IProductReadRepository
+public class ProductReadRepository(CustomDbContext context, IMapper mapper) : ReadRepository<Product>(context), IProductReadRepository
 {
-    public async Task<(IEnumerable<Product> products, MetaData metaData)> GetAllProductsAsync(ProductParameters parameters, bool tracking = false)
+    private readonly IMapper _mapper = mapper;
+
+    public async Task<(IEnumerable<Product>? products, MetaData metaData)> GetAllProductsAsync(ProductParameters parameters, bool tracking = false)
     {
-        RequestParameters requestParameters = new()
-        {
-            IsApproved = parameters.IsApproved,
-            IsDeleted = parameters.IsDeleted,
-            Pagination = parameters.Pagination
-        };
+        var requestParameters = _mapper.Map<RequestParameters>(parameters);
 
-        (IQueryable<Product> productsQuery, int productsQueryCount) = GetAllItems(requestParameters);
+        IQueryable<Product> productsQuery = GetAllItems();
 
-        if (parameters.AddProductDetail)
-            productsQuery = productsQuery.Include(pd => pd.ProductDetail);
-
-        if (parameters.AddCategory)
-            productsQuery = productsQuery.Include(c => c.Category);
-
-        if (parameters.AddOrders)
-            productsQuery = productsQuery.Include(o => o.OrderProducts!).ThenInclude(o => o.Order);
-
-        var productsList = await productsQuery.ToListAsync();
+        (IEnumerable<Product>? products, int count) = await BaseFiltersHelper<Product>.ItemFilters(productsQuery, requestParameters).ProductFiltersAsync(parameters);
 
         MetaData metaData = new()
         {
             CurrentPage = parameters.Pagination.PageNumber,
             PageSize = parameters.Pagination.PageSize,
-            TotalCount = productsQueryCount
+            TotalCount = count
         };
 
-        return (productsList, metaData);
+        return (products, metaData);
     }
 
-    public async Task<(IEnumerable<Product> products, MetaData metaData)> GetAllProductsAsync(ProductParameters parameters, Expression<Func<Product, bool>> filter, bool tracking = false)
+    public async Task<(IEnumerable<Product>? products, MetaData metaData)> GetAllProductsAsync(ProductParameters parameters, Expression<Func<Product, bool>> filter, bool tracking = false)
     {
-        RequestParameters requestParameters = new()
-        {
-            IsApproved = parameters.IsApproved,
-            IsDeleted = parameters.IsDeleted,
-            Pagination = parameters.Pagination
-        };
+        var requestParameters = _mapper.Map<RequestParameters>(parameters);
 
-        (IQueryable<Product> productsQuery, int productsQueryCount) = GetAllItems(requestParameters, filter);
+        IQueryable<Product> productsQuery = GetAllItems(filter);
 
-        if (parameters.AddProductDetail)
-            productsQuery = productsQuery.Include(pd => pd.ProductDetail);
-
-        if (parameters.AddCategory)
-            productsQuery = productsQuery.Include(c => c.Category);
-
-        if (parameters.AddOrders)
-            productsQuery = productsQuery.Include(o => o.OrderProducts!).ThenInclude(o => o.Order);
-
-        var productList = await productsQuery.ToListAsync();
+        (IEnumerable<Product>? products, int count) = await BaseFiltersHelper<Product>.ItemFilters(productsQuery, requestParameters).ProductFiltersAsync(parameters);
 
         MetaData metaData = new()
         {
             CurrentPage = parameters.Pagination.PageNumber,
             PageSize = parameters.Pagination.PageSize,
-            TotalCount = productsQueryCount
+            TotalCount = count
         };
 
-        return (productList, metaData);
+        return (products, metaData);
     }
 
     public async Task<Product?> GetProductAsync(ProductParameters parameters, Expression<Func<Product, bool>> filter, bool tracking = false)

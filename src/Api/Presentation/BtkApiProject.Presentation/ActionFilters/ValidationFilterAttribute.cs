@@ -9,7 +9,7 @@ public class ValidationFilterAttribute : ActionFilterAttribute
     {
         var controller = context.RouteData.Values["controller"];
         var action = context.RouteData.Values["action"];
-        var parameter = context.ActionArguments.FirstOrDefault(p => p.Value.ToString().Contains("Command")).Value;
+        var parameter = context.ActionArguments.FirstOrDefault(p => p.Value.ToString()!.Contains("Command")).Value;
 
         if (parameter is null)
         {

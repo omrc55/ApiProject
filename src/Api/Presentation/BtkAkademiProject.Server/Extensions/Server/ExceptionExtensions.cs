@@ -24,6 +24,7 @@ public static class ExceptionExtensions
                     {
                         NotAddedException => StatusCodes.Status400BadRequest,
                         NotFoundException => StatusCodes.Status404NotFound,
+                        BadRequestException => StatusCodes.Status400BadRequest,
                         _ => StatusCodes.Status500InternalServerError
                     };
 

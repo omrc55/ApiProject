@@ -1,5 +1,4 @@
 ﻿using BtkApiProject.Application.Interfaces.Repositories.Generic;
-using BtkApiProject.Application.Parameters;
 using BtkApiProject.Domain.Entities.Common;
 using BtkApiProject.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -13,47 +12,19 @@ public abstract class ReadRepository<T>(CustomDbContext context) : IReadReposito
 
     public DbSet<T> Table => _context.Set<T>();
 
-    public (IQueryable<T> items, int count) GetAllItems(RequestParameters parameters, bool tracking = false)
+    public IQueryable<T> GetAllItems(bool tracking = false)
     {
         IQueryable<T> query = Table.AsQueryable().OrderBy(o => o.CreatedDate);
 
-        if (parameters.IsApproved is not null)
-            query = query.Where(a => a.IsApproved == parameters.IsApproved);
-
-        if (parameters.IsDeleted is not null)
-            query = query.Where(d => d.IsDeleted == parameters.IsDeleted);
-
         if (!tracking)
             query.AsNoTracking();
 
-        int queryCount = query.Count();
-        query = query.Skip((parameters.Pagination.PageNumber - 1) * parameters.Pagination.PageSize).Take(parameters.Pagination.PageSize);
-
-        return (query, queryCount);
-    }
-
-    public (IQueryable<T> items, int count) GetAllItems(RequestParameters parameters, Expression<Func<T, bool>> filter, bool tracking = false)
-    {
-        IQueryable<T> query = Table.Where(filter).OrderBy(o => o.CreatedDate);
-
-        if (parameters.IsApproved is not null)
-            query = query.Where(a => a.IsApproved == parameters.IsApproved);
-
-        if (parameters.IsDeleted is not null)
-            query = query.Where(d => d.IsDeleted == parameters.IsDeleted);
-
-        if (!tracking)
-            query.AsNoTracking();
-
-        int queryCount = query.Count();
-        query = query.Skip((parameters.Pagination.PageNumber - 1) * parameters.Pagination.PageSize).Take(parameters.Pagination.PageSize);
-
-        return (query, queryCount);
+        return query;
     }
 
     public IQueryable<T> GetAllItems(Expression<Func<T, bool>> filter, bool tracking = false)
     {
-        IQueryable<T> query = Table.Where(filter);
+        IQueryable<T> query = Table.Where(filter).OrderBy(o => o.CreatedDate);
 
         if (!tracking)
             query.AsNoTracking();

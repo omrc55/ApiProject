@@ -5,9 +5,4 @@ using BtkApiProject.Persistence.Repositories.Generic;
 
 namespace BtkApiProject.Persistence.Repositories.Write;
 
-public class OrderWriteRepository : WriteRepository<Order>, IOrderWriteRepository
-{
-    public OrderWriteRepository(CustomDbContext context) : base(context)
-    {
-    }
-}
+public class OrderWriteRepository(CustomDbContext context) : WriteRepository<Order>(context), IOrderWriteRepository { }

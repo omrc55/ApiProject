@@ -11,4 +11,9 @@ public sealed record GetAllProductsQueryRequest : IRequest<GetAllProductsQueryRe
     public bool AddOrders { get; init; } = false;
     public int PageNumber { get; init; }
     public int PageSize { get; init; }
+    public uint? MinPrice { get; init; } = null;
+    public uint? MaxPrice { get; init; } = null;
+    public uint? MinQuantity { get; init; } = null;
+    public uint? MaxQuantity { get; init; } = null;
+    public List<string>? CategoryIDs { get; init; } = null;
 }

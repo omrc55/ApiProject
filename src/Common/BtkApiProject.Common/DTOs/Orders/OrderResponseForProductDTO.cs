@@ -2,6 +2,4 @@
 
 namespace BtkApiProject.Common.DTOs.Orders;
 
-public record OrderResponseForProductDTO : BaseResponseDTO
-{
-}
+public record OrderResponseForProductDTO : BaseResponseDTO { }

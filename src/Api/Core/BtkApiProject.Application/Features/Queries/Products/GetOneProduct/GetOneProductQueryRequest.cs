@@ -11,4 +11,10 @@ public sealed record GetOneProductQueryRequest : IRequest<GetOneProductQueryResp
     public bool AddProductDetail { get; init; } = false;
     public bool AddCategory { get; init; } = false;
     public bool AddOrders { get; init; } = false;
+    public bool ValidID => IsGuid(ID);
+
+    private static bool IsGuid(string input)
+    {
+        return Guid.TryParse(input, out _);
+    }
 }

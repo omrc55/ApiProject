@@ -5,9 +5,4 @@ using BtkApiProject.Persistence.Repositories.Generic;
 
 namespace BtkApiProject.Persistence.Repositories.Write;
 
-public class ProductDetailWriteRepository : WriteRepository<ProductDetail>, IProductDetailWriteRepository
-{
-    public ProductDetailWriteRepository(CustomDbContext context) : base(context)
-    {
-    }
-}
+public class ProductDetailWriteRepository(CustomDbContext context) : WriteRepository<ProductDetail>(context), IProductDetailWriteRepository { }

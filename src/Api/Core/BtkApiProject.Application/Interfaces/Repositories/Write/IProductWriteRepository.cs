@@ -3,6 +3,4 @@ using BtkApiProject.Domain.Entities;
 
 namespace BtkApiProject.Application.Interfaces.Repositories.Write;
 
-public interface IProductWriteRepository : IWriteRepository<Product>
-{
-}
+public interface IProductWriteRepository : IWriteRepository<Product> { }
