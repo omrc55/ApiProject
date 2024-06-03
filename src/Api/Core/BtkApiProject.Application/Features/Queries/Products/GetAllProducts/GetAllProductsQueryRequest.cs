@@ -16,4 +16,6 @@ public sealed record GetAllProductsQueryRequest : IRequest<GetAllProductsQueryRe
     public uint? MinQuantity { get; init; } = null;
     public uint? MaxQuantity { get; init; } = null;
     public List<string>? CategoryIDs { get; init; } = null;
+    public string? SearchTerm { get; init; }
+    public string? OrderBy { get; init; }
 }

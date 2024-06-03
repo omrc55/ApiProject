@@ -1,9 +1,9 @@
 ﻿using BtkApiProject.Application.Parameters;
 using BtkApiProject.Domain.Entities.Common;
 
-namespace BtkApiProject.Persistence.Repositories.Read.Helpers;
+namespace BtkApiProject.Persistence.Repositories.Read.Extensions;
 
-public static class BaseFiltersHelper<T> where T : BaseEntity
+public static class BaseFilters<T> where T : BaseEntity
 {
     public static IQueryable<T>? ItemFilters(IQueryable<T>? values, RequestParameters parameters)
     {

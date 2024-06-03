@@ -5,7 +5,8 @@ using BtkApiProject.Application.Parameters;
 using BtkApiProject.Domain.Entities;
 using BtkApiProject.Persistence.Contexts;
 using BtkApiProject.Persistence.Repositories.Generic;
-using BtkApiProject.Persistence.Repositories.Read.Helpers;
+using BtkApiProject.Persistence.Repositories.Read.Extensions;
+using BtkApiProject.Persistence.Repositories.Read.Extensions.Products;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -21,7 +22,7 @@ public class ProductReadRepository(CustomDbContext context, IMapper mapper) : Re
 
         IQueryable<Product> productsQuery = GetAllItems();
 
-        (IEnumerable<Product>? products, int count) = await BaseFiltersHelper<Product>.ItemFilters(productsQuery, requestParameters).ProductFiltersAsync(parameters);
+        (IEnumerable<Product>? products, int count) = await BaseFilters<Product>.ItemFilters(productsQuery, requestParameters).ProductFilters(parameters).ProductIncludes(parameters).ProductSearch(parameters.SearchTerm).OrderByProducts(parameters.OrderBy).ProductPaginationAsync(parameters.Pagination);
 
         MetaData metaData = new()
         {
@@ -39,7 +40,7 @@ public class ProductReadRepository(CustomDbContext context, IMapper mapper) : Re
 
         IQueryable<Product> productsQuery = GetAllItems(filter);
 
-        (IEnumerable<Product>? products, int count) = await BaseFiltersHelper<Product>.ItemFilters(productsQuery, requestParameters).ProductFiltersAsync(parameters);
+        (IEnumerable<Product>? products, int count) = await BaseFilters<Product>.ItemFilters(productsQuery, requestParameters).ProductFilters(parameters).ProductIncludes(parameters).ProductSearch(parameters.SearchTerm).OrderByProducts(parameters.OrderBy).ProductPaginationAsync(parameters.Pagination);
 
         MetaData metaData = new()
         {
