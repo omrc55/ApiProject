@@ -12,6 +12,7 @@ public record ProductParameters : RequestParameters
     public List<string>? CategoryIDs { get; init; } = null;
     public string? SearchTerm { get; init; }
     public string? OrderBy { get; init; }
+    public string? Fields { get; init; }
     public bool ValidCategoryIDs => CategoryIDs is not null && CategoryIDs.All(IsGuid);
     public bool ValidPriceRange => MaxPrice > MinPrice || MinPrice is null || MaxPrice is null;
     public bool ValidQuantity => MaxQuantity > MinQuantity || MinQuantity is null || MaxQuantity is null;
