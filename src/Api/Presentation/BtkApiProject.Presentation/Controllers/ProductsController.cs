@@ -18,7 +18,8 @@ public class ProductsController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
 
-    [HttpGet]
+    [HttpHead]
+    [HttpGet(Name = "GetAllProducts")]
     [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
     public async Task<IActionResult> GetAllProducts([FromQuery] GetAllProductsQueryRequest request)
     {
@@ -68,5 +69,12 @@ public class ProductsController(IMediator mediator) : ControllerBase
     {
         var response = await _mediator.Send(request);
         return Ok(response);
+    }
+
+    [HttpOptions]
+    public IActionResult GetProductsOptions()
+    {
+        Response.Headers.Add("Allow", "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS");
+        return Ok();
     }
 }
