@@ -19,10 +19,14 @@ public class ProductsController(IMediator mediator) : ControllerBase
     private readonly IMediator _mediator = mediator;
 
     [HttpGet]
+    [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
     public async Task<IActionResult> GetAllProducts([FromQuery] GetAllProductsQueryRequest request)
     {
         var response = await _mediator.Send(request);
         Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(response.MetaData));
+
+        if (response.LinkResponse is not null)
+            return response.LinkResponse.HasLinks ? Ok(response.LinkResponse.LinkedEntities) : Ok(response.LinkResponse.ShapedEntities);
 
         return Ok(response);
     }

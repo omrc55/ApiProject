@@ -22,5 +22,7 @@ public static class ServiceRegistrations
         services.AddScoped<IProductDetailWriteRepository, ProductDetailWriteRepository>();
 
         services.AddScoped<IDataShaper<ProductResponseDTO>, DataShaper<ProductResponseDTO>>();
+
+        services.AddScoped<IProductLinks, ProductLinks>();
     }
 }

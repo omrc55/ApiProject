@@ -1,9 +1,9 @@
-﻿using System.Dynamic;
+﻿using BtkApiProject.Application.Helpers;
 
 namespace BtkApiProject.Application.Interfaces.Services;
 
 public interface IDataShaper<T> where T : class
 {
-    IEnumerable<ExpandoObject>? ShapeData(IEnumerable<T>? entities, string? filedsString);
-    ExpandoObject? ShapeData(T? entity, string? filedsString);
+    IEnumerable<ShapedEntity>? ShapeData(IEnumerable<T>? entities, string? filedsString);
+    ShapedEntity? ShapeData(T? entity, string? filedsString);
 }

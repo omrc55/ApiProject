@@ -8,10 +8,10 @@ using MediatR;
 
 namespace BtkApiProject.Application.Features.Queries.Products.GetAllProducts;
 
-public class GetAllProductsQueryHandler(IProductReadRepository productReadRepository, IMapper mapper, ILoggerService logger, IDataShaper<ProductResponseDTO> shaper) : IRequestHandler<GetAllProductsQueryRequest, GetAllProductsQueryResponse>
+public class GetAllProductsQueryHandler(IProductReadRepository productReadRepository, IMapper mapper, ILoggerService logger, IProductLinks productLinks) : IRequestHandler<GetAllProductsQueryRequest, GetAllProductsQueryResponse>
 {
     private readonly IProductReadRepository _productReadRepository = productReadRepository;
-    private readonly IDataShaper<ProductResponseDTO> _shaper = shaper;
+    private readonly IProductLinks _productLinks = productLinks;
     private readonly ILoggerService _logger = logger;
     private readonly IMapper _mapper = mapper;
 
@@ -22,13 +22,10 @@ public class GetAllProductsQueryHandler(IProductReadRepository productReadReposi
         var (products, metaData) = await _productReadRepository.GetAllProductsAsync(productParameters);
 
         var productsDTO = _mapper.Map<IEnumerable<ProductResponseDTO>>(products);
-        var shapedData = _shaper.ShapeData(productsDTO, productParameters.Fields);
+        var links = _productLinks.TryGenerateLinks(productsDTO, request.Fields);
 
         _logger.LogInfo(LogMessages.ProductsListed);
 
-        if (string.IsNullOrWhiteSpace(productParameters.Fields))
-            return new() { MetaData = metaData, Products = productsDTO };
-        else
-            return new() { MetaData = metaData, ExProducts = shapedData };
+        return new() { MetaData = metaData, LinkResponse = links };
     }
 }

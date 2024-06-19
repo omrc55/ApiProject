@@ -1,6 +1,7 @@
 using BtkAkademiProject.Server.Extensions.Application;
 using BtkAkademiProject.Server.Extensions.Infrastructure;
 using BtkAkademiProject.Server.Extensions.Persistence;
+using BtkAkademiProject.Server.Extensions.Presentation;
 using BtkAkademiProject.Server.Extensions.Server;
 using BtkApiProject.Application.Interfaces.Services;
 
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureController();
 builder.Services.ConfigureApiBehavior();
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -18,8 +20,9 @@ builder.Services.CustomDbContextConfiguration(builder.Configuration);
 builder.Services.ApplicationServiceRegistrations();
 builder.Services.PersistenceServiceRegistrations();
 builder.Services.InfrastructureServiceRegistrations();
-builder.Services.ServerServiceRegistrations();
+builder.Services.PresentationServiceRegistrations();
 builder.Services.ConfigureHttpLogging();
+builder.Services.ConfigureMediaTypes();
 builder.Services.ConfigureCors();
 
 builder.Host.ConfigureSerilog(builder.Configuration);
