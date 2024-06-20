@@ -11,9 +11,11 @@ public static class MediaTypeExtensions
         {
             var jsonOutputFormatter = config.OutputFormatters.OfType<SystemTextJsonOutputFormatter>().FirstOrDefault();
             jsonOutputFormatter?.SupportedMediaTypes.Add("application/vnd.reysadijital.hateoas+json");
+            jsonOutputFormatter?.SupportedMediaTypes.Add("application/vnd.reysadijital.apiroot+json");
 
             var xmlOutputFormatter = config.OutputFormatters.OfType<XmlDataContractSerializerOutputFormatter>().FirstOrDefault();
             xmlOutputFormatter?.SupportedMediaTypes.Add("application/vnd.reysadijital.hateoas+xml");
+            xmlOutputFormatter?.SupportedMediaTypes.Add("application/vnd.reysadijital.apiroot+xml");
         });
     }
 }

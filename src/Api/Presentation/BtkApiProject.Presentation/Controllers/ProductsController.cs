@@ -39,7 +39,7 @@ public class ProductsController(IMediator mediator) : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost]
+    [HttpPost(Name = "AddProduct")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> AddProduct([FromBody] AddProductCommandRequest request)
     {

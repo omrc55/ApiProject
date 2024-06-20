@@ -8,9 +8,8 @@ using Microsoft.Net.Http.Headers;
 
 namespace BtkApiProject.Persistence.Services;
 
-public class ProductLinks(LinkGenerator linkGenerator, IDataShaper<ProductResponseDTO> shaper, IHttpContextAccessor context) : IProductLinks
+public class ProductLinks(IDataShaper<ProductResponseDTO> shaper, IHttpContextAccessor context) : IProductLinks
 {
-    private readonly LinkGenerator _linkGenerator = linkGenerator;
     private readonly IDataShaper<ProductResponseDTO> _shaper = shaper;
     private readonly IHttpContextAccessor _context = context;
 
